@@ -11,6 +11,8 @@ import Register from "./Pages/Authentication/Register.jsx";
 import Login from "./Pages/Authentication/Login.jsx";
 import ForgetPassword from "./Components/AuthComponents/ForgetPassword.jsx";
 import ResetPassword from "./Components/AuthComponents/ResetPassword.jsx";
+import NotFound from "./Pages/NotFound.jsx";
+
 function App() {
 
   return (
