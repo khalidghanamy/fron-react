@@ -16,7 +16,7 @@ const ForgetPassword = () => {
 
   useEffect(() => {
     if (localStorage.getItem("task-user")) {
-      navigate("/home");
+      navigate("/");
     }
   }, []);
   //============== toast handler ===============
