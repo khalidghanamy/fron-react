@@ -17,7 +17,7 @@ const Register = () => {
 
     useEffect(()=>{
       if(localStorage.getItem("task-user")){
-          navigate("/home")
+          navigate("/")
       }
   },[])
   
@@ -47,6 +47,7 @@ const Register = () => {
            toast.error(data.msg,toastOption)}
            if(data.status===true){
              localStorage.setItem("task-user",JSON.stringify(data.newUser))
+             localStorage.setItem("token",JSON.stringify(data.accessToken))
              console.log(data);
              navigate("/")
             }

@@ -17,7 +17,7 @@ export const login = async (loginData) => {
 export const register = async(registrationData) => {
     try{
 
-        const {data}= await axios.post(`${url}/signup`, registrationData)
+        const {data}= await axios.post(`${url}/signup`, registrationData);
         return data
     }catch(error){
         
@@ -28,7 +28,7 @@ export const register = async(registrationData) => {
 export const forgetPassword = async(email) => {
     try{
 
-        const {data}= await axios.post(`${urlReset}/forget-password`, email)
+        const {data}= await axios.post(`${urlReset}/forget-password`, email);
         return data
     }catch(error){
         
@@ -40,7 +40,7 @@ export const resetPassword = async(resetData) => {
     try{
 //const link = `http://localhost:4000/reset-password/${user.id}/${token}`;
         
-        const {data}= await axios.post(`${urlReset}/reset-password`, resetData)
+        const {data}= await axios.post(`${urlReset}/reset-password`, resetData);
         return data
     }catch(error){
         console.log(error);

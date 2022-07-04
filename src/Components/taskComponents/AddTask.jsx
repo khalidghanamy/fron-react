@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import useTasks from "../../store/Task.js";
@@ -9,7 +9,11 @@ import { useNavigate } from "react-router-dom";
 const AddTask = ({  }) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const user = JSON.parse(localStorage.getItem("task-user"))
+ 
+ 
+      const user = JSON.parse(localStorage.getItem("task-user"))
+
+ 
   const [values,setValues]=useState({
     title:'',
     description:'',

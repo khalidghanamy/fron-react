@@ -78,7 +78,7 @@ useEffect(() => {
   (async () => {
     const user = JSON.parse(localStorage.getItem("task-user"));
     setUser(user);
-  
+  console.log(user);
      const data = await  getAllTasks(user._id);
     
      setTasksTest(data)

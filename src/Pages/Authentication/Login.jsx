@@ -38,11 +38,12 @@ const Login = () => {
         
 
     const data= await login(values);
-            console.log(data);
            if(data.status===false){
            toast.error(data.msg,toastOption)}
            if(data.status===true){
+            console.log(data.user);
                localStorage.setItem("task-user",JSON.stringify(data.user))
+               localStorage.setItem("token",JSON.stringify(data.token))
                   navigate("/")
             }
         }
