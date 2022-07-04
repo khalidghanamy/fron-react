@@ -24,6 +24,8 @@ function App() {
       <Route path="/login" element={<Login/>}/>
       <Route path="/forgetpassword" element={<ForgetPassword/>}/>
       <Route path="/resetpassword/:id/:token" element={<ResetPassword/>}/>
+       {/* not found  */}
+       <Route path="*" element={<NotFound/>}/>
     
      
     </Routes>
