@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function Home() {
-  const { tasks, getAllTasks,updateTask } = useTasks();
+  const { tasks, getAllTasks,updateTask ,deleteTask,createTask} = useTasks();
   const [taskStatus, setTaskStatus] = useState(["Todo", "InProgress", "UnderReview", "Rework","Completed"]);
 const navigate = useNavigate()  
 const [user, setUser] = useState({});
@@ -51,15 +51,17 @@ const onDragEnd = async (result) => {
      if (result.destination !== null ) {
       const newItem ={...item,status:result.destination.droppableId}
      
-
-      await updateListStatus(newItem)
+      await deleteTask(newItem.id);
+      console.log(newItem);
+      // await updateListStatus(newItem)
       const [removed] = removeFromList(items, result.source.index);
       const newItems = addToList(items, result.destination.index, removed);
       const [reOrderedItems] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reOrderedItems);
       console.log(items);
-      setTasksTest(newItems);
       console.log('done');
+      setTasksTest(newItems);
+      await createTask(newItem,user._id);
       setUpdateList(Math.random()*100);
 
 
@@ -98,7 +100,7 @@ useEffect(() => {
           <DragDropContext onDragEnd={onDragEnd} >
           <div className="row" style={{marginRight:"5.1rem"}}>
            
-          {tasks.length>0&&
+          {
             taskStatus.map((task, index) => (
               
            
