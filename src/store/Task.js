@@ -51,6 +51,13 @@ const useTasks = create(set => ({
     getTask: async (id) => {
         const data = await getTask(id);
         set(state => ({ task: data}))
+
+    }
+    ,
+    editeTaskPosition: async ()=>{
+        
+        set(state=>({tasks: state.tasks.filter(task=>task.id !==id) }))
+        set(state=>({tasks: state.tasks.filter(task=>task.id !==id) }))
     }
 
     
