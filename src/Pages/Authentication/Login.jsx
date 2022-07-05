@@ -70,7 +70,7 @@ const Login = () => {
 
 return (
 <>
-<div className="card mt-5">
+<div className="card" style={{ marginTop:"10rem"}}>
         <div className="card-header d-flex justify-content-center">
             <h3>Login</h3>
         </div>

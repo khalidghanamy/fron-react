@@ -88,7 +88,7 @@ const Register = () => {
 
 return (
 <>
-<div className="card mt-5">
+<div className="card" style={{ marginTop:"10rem",width:"50vw"}}>
 <div className="card-header d-flex justify-content-center">
             <h3>Register</h3>
         </div>
