@@ -6,9 +6,14 @@ const useTasks = create(set => ({
     tasks: [],
     task: {},
     getAllTasks: async (userId)=>{
-        const data = await getTasks(userId);
-        set(state => ({ tasks:data}))
-        return data
+        try{
+            const {data} = await getTasks(userId);
+            set(state => ({ tasks:data.userTasks}))
+            return data
+
+        }catch(error){
+            return error.response.data
+        }
     }
     ,
     createTask: async (newTask,userId) => {
@@ -53,7 +58,19 @@ const useTasks = create(set => ({
         set(state => ({ task: data}))
 
     }
+    ,
+    deleteOnDrag:  (id) => {
     
+            set(state => ({ tasks: state.tasks.filter(task => task.id !== id)}))
+        return;
+    },
+    updateOnDrag:  (id, updatedData) => {
+
+        set(state => ({ tasks: state.tasks.filter(
+            task =>  task.id === updatedData.id ? updatedData : task)}))
+            return;
+    }
+
 
     
 }));

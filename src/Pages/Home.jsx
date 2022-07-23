@@ -28,7 +28,6 @@ useEffect(() => {
 }, []);
 
 
-
 const updateListStatus = async (newItem)=>{
 
   await updateTask(newItem.id,newItem);
@@ -78,10 +77,16 @@ useEffect(() => {
   (async () => {
     const user = JSON.parse(localStorage.getItem("task-user"));
     setUser(user);
-  console.log(user);
-     const data = await  getAllTasks(user._id);
     
-     setTasksTest(data)
+      const data = await  getAllTasks(user._id);
+      console.log(data);
+        if (data.status) {
+          setTasksTest(data.userTasks);
+        }else{
+          localStorage.removeItem("task-user");
+          localStorage.removeItem("token");
+           navigate("/login");  
+        }
      }
      )();
  
@@ -97,7 +102,11 @@ useEffect(() => {
           <AddTask setUpdateList={setUpdateList}/>
           </div>
           </div>
-          <DragDropContext onDragEnd={onDragEnd} >
+          <DragDropContext 
+
+          onDragEnd={onDragEnd} 
+
+          >
           <div className="row" style={{marginRight:"5.1rem"}}>
            
           {

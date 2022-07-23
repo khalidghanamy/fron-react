@@ -4,9 +4,9 @@ const url = `${process.env.REACT_APP_SERVER_URL}/tasks`;
 
 const getHeaders = () => {return {headers: {'Authorization': JSON.parse(localStorage.getItem("token"))}}}
 export const getTasks = async (userId) => {
-  const {data}= await axios.get(`${url}/read/${userId}`,getHeaders());
+  const data= await axios.get(`${url}/read/${userId}`,getHeaders());
  
-  return data.userTasks 
+  return data 
 };
 export const createTask = async(newTask,userId) => {
   try {

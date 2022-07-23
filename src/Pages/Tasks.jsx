@@ -15,16 +15,7 @@ const CheckStatus = () => {
     return filteredTasks;
 }
 
-    const onDragEnd = result => {
-        console.log(result);
-        if(result.destination ){
-
-            const items =Array.from(filteredTasks)
-            const [reOrderedItems] = items.splice(result.source.index, 1);
-            items.splice(result.destination.index, 0, reOrderedItems);
-            setFilteredTasks(items);
-        }
-    }
+    
 
     useEffect(() => {
         setFilteredTasks(CheckStatus());
@@ -45,7 +36,7 @@ const CheckStatus = () => {
           {filteredTasks.map((task,index) => (
                     
                 <Task key={task.id} task={task} setUpdateList={setUpdateList} index={index} />
-            
+
                 ))}
                 {provided.placeholder}
                 </div>
@@ -54,7 +45,6 @@ const CheckStatus = () => {
             </Card.Body>
                 </Card>
         
-
         
         
         </>

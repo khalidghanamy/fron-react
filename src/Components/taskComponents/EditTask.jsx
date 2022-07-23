@@ -12,7 +12,7 @@ import {AiFillEdit} from 'react-icons/ai';
 function EditeTask({task,setUpdateList}) {
   const [show, setShow] = useState(false);
   const {updateTask} = useTasks()
-  
+  const [evento, setEvento] = useState(undefined)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     const [taskData, setTaskData] = useState(task);
@@ -36,19 +36,28 @@ const toastOption={
  }
 //=====================handle Submit=======================
 const handleSubmit=async (event)=>{
-    event.preventDefault();
-   if(handleValidation()){
+  console.log(event);
+  setEvento(event)
+  if(handleValidation()){
     
-await updateTask(task.id,taskData);
-handleClose()
-setUpdateList(Math.random()*100);
+    await updateTask(task.id,taskData);
+    handleClose()
+    toast.success("Task Updated Successfully",toastOption)
+    handleEdite()
+    event.preventDefault();
 
-        
        
       }
   }
  
-  
+  const handleEdite=()=>{
+    setTimeout(
+       ()=>{
+
+        }
+        ,200
+    )
+      }
   //=====================validation=======================
   
 const handleValidation=()=>{
@@ -71,10 +80,9 @@ const handleValidation=()=>{
   if (priority==="") {
     toast.error("priority is required",toastOption);
     return false;
-
-
   }
   if (
+
     startedAt > finishedAt ||
     startedAt === finishedAt ||
     startedAt === "" ||
@@ -83,8 +91,6 @@ const handleValidation=()=>{
     toast.error("date is invalid",toastOption);
     return false;
   }
-  
-
   return true
   ;
 }
