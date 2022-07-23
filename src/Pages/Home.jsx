@@ -28,30 +28,21 @@ useEffect(() => {
 }, []);
 
 
-const updateListStatus = async (newItem)=>{await updateTask(newItem.id,newItem);}
 
 const onDragEnd = async (result) => {
   if (!result.destination) {
     return;
   }
 
-    const items =Array.from(tasksTest)
-    const item=items[result.source.index]
-    console.log(item);
-    
-     if (result.destination !== null ) {
-      const newItem ={...item,status:result.destination.droppableId}
-     
-      await deleteTask(newItem.id);
-      // await updateListStatus(newItem)
-      const [removed] = removeFromList(items, result.source.index);
-      const newItems = addToList(items, result.destination.index, removed);
-      const [reOrderedItems] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reOrderedItems);
+  const items = tasksTest
+  const item=items[result.source.index]
   
-      setTasksTest(newItems);
-      await createTask(newItem,user._id);
-      setUpdateList(Math.random()*100);
+   if (result.destination !== null ) {
+    const newItem ={...item,status:result.destination.droppableId}
+   
+    await updateTask(newItem.id,newItem);  
+    setUpdateList(Math.random()*100);
+
 }
 };
 

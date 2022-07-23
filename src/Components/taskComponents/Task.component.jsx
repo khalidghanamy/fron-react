@@ -20,9 +20,9 @@ const Task = ({task ,setUpdateList,index,setTasksTest}) => {
 
                     >
 
-            <Card className="container" >
+            <Card className="container h-100"  >
          
-                <div className="row align-items-center">
+                <div className="row align-items-center h-100" >
              
                <div className="col-4 ">
                     <Card.Title>{task.title}</Card.Title>
