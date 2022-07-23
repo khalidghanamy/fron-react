@@ -28,21 +28,13 @@ useEffect(() => {
 }, []);
 
 
-const updateListStatus = async (newItem)=>{
-
-  await updateTask(newItem.id,newItem);
-
-
-}
+const updateListStatus = async (newItem)=>{await updateTask(newItem.id,newItem);}
 
 const onDragEnd = async (result) => {
-  console.log(result);
   if (!result.destination) {
     return;
   }
 
-  
-  
     const items =Array.from(tasksTest)
     const item=items[result.source.index]
     console.log(item);
@@ -51,23 +43,15 @@ const onDragEnd = async (result) => {
       const newItem ={...item,status:result.destination.droppableId}
      
       await deleteTask(newItem.id);
-      console.log(newItem);
       // await updateListStatus(newItem)
       const [removed] = removeFromList(items, result.source.index);
       const newItems = addToList(items, result.destination.index, removed);
       const [reOrderedItems] = items.splice(result.source.index, 1);
       items.splice(result.destination.index, 0, reOrderedItems);
-      console.log(items);
-      console.log('done');
+  
       setTasksTest(newItems);
       await createTask(newItem,user._id);
       setUpdateList(Math.random()*100);
-
-
-
-    
-
-
 }
 };
 
@@ -114,7 +98,7 @@ useEffect(() => {
               
            
                 <div className="col-lg-4 col-md-6 col-sm-12 mt-3" key={index}>
-                  <Tasks tasks={tasksTest}  taskStatus={task} key={index} setUpdateList={setUpdateList} updateList={updateList}/>
+                  <Tasks tasks={tasksTest}  taskStatus={task} key={index} setUpdateList={setUpdateList} updateList={updateList} setTasksTest={setTasksTest}/>
                 </div>
               
             ))

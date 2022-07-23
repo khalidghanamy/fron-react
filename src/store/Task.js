@@ -27,10 +27,10 @@ const useTasks = create(set => ({
             return  err.response.data
         }
     },
-    updateTask: async (id, updatedData) => {
+    updateTask: async (id,userId, updatedData) => {
         try{
 
-            const {data} = await updateTask(id, updatedData);
+            const {data} = await updateTask(id,userId, updatedData);
                     
             set(state => ({ tasks: state.tasks.filter(
                 task =>  task.id === data.task_.id ? data.task : task)}))

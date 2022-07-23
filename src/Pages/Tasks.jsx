@@ -5,9 +5,11 @@ import useTasks from '../store/Task.js'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
-const Tasks = ({tasks,taskStatus,setUpdateList,updateList}) => {
+const Tasks = ({tasks,taskStatus,setUpdateList,updateList,setTasksTest}) => {
 
 const [filteredTasks, setFilteredTasks] = useState([]);
+
+
 
 const CheckStatus = () => {
     
@@ -15,12 +17,17 @@ const CheckStatus = () => {
     return filteredTasks;
 }
 
+useEffect(() => {
+    setFilteredTasks(CheckStatus());
+}
+, [tasks, taskStatus]);
+
     
 
-    useEffect(() => {
-        setFilteredTasks(CheckStatus());
-    }
-   ,[tasks.length,updateList] ); 
+//     useEffect(() => {
+//         setFilteredTasks(CheckStatus());
+//     }
+//    ,[tasks.length,updateList] ); 
     return ( 
         <>
             <Card className="p-0 m-5 w-100 h-100">
@@ -35,7 +42,7 @@ const CheckStatus = () => {
             <div ref={provided.innerRef} {...provided.droppableProps} {...provided.dragHandleProps} >
           {filteredTasks.map((task,index) => (
                     
-                <Task key={task.id} task={task} setUpdateList={setUpdateList} index={index} />
+                <Task key={task.id} task={task} setUpdateList={setUpdateList} index={index} setTasksTest={setTasksTest} />
 
                 ))}
                 {provided.placeholder}

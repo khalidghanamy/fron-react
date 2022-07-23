@@ -7,7 +7,7 @@ import DeleteTask from "./DeleteTask.jsx";
 import Logout from "../AuthComponents/Logout.jsx";
 import { Draggable } from 'react-beautiful-dnd';
 
-const Task = ({task ,setUpdateList,index}) => {
+const Task = ({task ,setUpdateList,index,setTasksTest}) => {
  
 
     return ( 
@@ -34,7 +34,7 @@ const Task = ({task ,setUpdateList,index}) => {
                     <TaskDetails  task={task}/> 
                     </div>
                     <div className="col-1 ">
-                    <EditeTask  task={task} setUpdateList={setUpdateList}/> 
+                    <EditeTask  task={task} setUpdateList={setUpdateList} setTasksTest={setTasksTest}/> 
                     </div>
 
                     <div className="col-1 ">

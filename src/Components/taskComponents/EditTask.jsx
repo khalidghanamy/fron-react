@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState,useCallback} from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
@@ -9,9 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import {AiFillEdit} from 'react-icons/ai';
 
 
-function EditeTask({task,setUpdateList}) {
+function EditeTask({task,setTasksTest}) {
+
   const [show, setShow] = useState(false);
-  const {updateTask} = useTasks()
+  const {updateTask,getAllTasks} = useTasks()
   const [evento, setEvento] = useState(undefined)
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -36,12 +37,18 @@ const toastOption={
  }
 //=====================handle Submit=======================
 const handleSubmit=async (event)=>{
-  console.log(event);
+event.preventDefault()
   setEvento(event)
   if(handleValidation()){
-    
+    const user = JSON.parse(localStorage.getItem("task-user"));
+
     await updateTask(task.id,taskData);
+    const data = await  getAllTasks(user._id);
+    console.log(data.userTasks);
+    setTasksTest(data.userTasks);
     handleClose()
+     
+ 
     toast.success("Task Updated Successfully",toastOption)
     handleEdite()
     event.preventDefault();
