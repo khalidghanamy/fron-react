@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function Home() {
-  const { tasks, getAllTasks,updateTask ,deleteTask,createTask} = useTasks();
+  const { tasks, getAllTasks,updateTask ,deleteTask,createTask,getAllTasksNormal} = useTasks();
   const [taskStatus, setTaskStatus] = useState(["Todo", "InProgress", "UnderReview", "Rework","Completed"]);
 const navigate = useNavigate()  
 const [user, setUser] = useState({});
@@ -28,6 +28,16 @@ useEffect(() => {
 }, []);
 
 
+const tasksAsnd={
+  Todo:0,
+  InProgress:1,
+  UnderReview:2,
+  Rework:3,
+  Completed:4
+
+}
+
+
 
 const onDragEnd = async (result) => {
   if (!result.destination) {
@@ -36,15 +46,23 @@ const onDragEnd = async (result) => {
 
   const items = tasksTest
   const item=items[result.source.index]
+  console.log(tasksAsnd[item.status]);
   
    if (result.destination !== null ) {
-    const newItem ={...item,status:result.destination.droppableId}
+    if(tasksAsnd[item.status]>tasksAsnd[result.destination.droppableId]){
+      
+      return;} 
+    
+   else {const newItem ={...item,status:result.destination.droppableId}
    
     await updateTask(newItem.id,newItem);  
-    setUpdateList(Math.random()*100);
+    setUpdateList(Math.random()*100);}
 
 }
 };
+
+
+
 
 
 
@@ -54,18 +72,30 @@ useEffect(() => {
     setUser(user);
     
       const data = await  getAllTasks(user._id);
-      console.log(data);
         if (data.status) {
+          console.log('ssssssssssssssssssssssss');
           setTasksTest(data.userTasks);
         }else{
           localStorage.removeItem("task-user");
           localStorage.removeItem("token");
            navigate("/login");  
         }
+
      }
      )();
  
-  }, [tasks.length,updateList]);
+  }, [tasks.length]);
+
+
+  useEffect(() => {
+
+    const dataNormal = getAllTasksNormal()
+       
+    console.log(dataNormal)
+   setTasksTest(dataNormal)
+
+  }
+  , [tasks,updateList]);
   return (
     <>
         {<div className="container p-0 m-0">
@@ -82,13 +112,13 @@ useEffect(() => {
           onDragEnd={onDragEnd} 
 
           >
-          <div className="row" style={{marginRight:"5.1rem"}}>
+          <div className="row" style={{marginRight:"6rem"}}>
            
           {
             taskStatus.map((task, index) => (
               
            
-                <div className="col-lg-4 col-md-6 col-sm-12 mt-3" key={index}>
+                <div className="col-lg-4 col-md-6 col-sm-12 mt-3 " key={index}>
                   <Tasks tasks={tasksTest}  taskStatus={task} key={index} setUpdateList={setUpdateList} updateList={updateList} setTasksTest={setTasksTest}/>
                 </div>
               

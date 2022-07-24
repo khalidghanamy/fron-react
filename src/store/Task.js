@@ -1,8 +1,9 @@
 import create from 'zustand';
+import {devtools} from 'zustand/middleware';
 import {getTasks, createTask,updateTask ,deleteTask,getTask} from '../Storage/api/taskApi.js'
 
 
-const useTasks = create(set => ({
+const useTasks = create(devtools((set,get) => ({
     tasks: [],
     task: {},
     getAllTasks: async (userId)=>{
@@ -14,6 +15,12 @@ const useTasks = create(set => ({
         }catch(error){
             return error.response.data
         }
+    }
+    ,
+    getAllTasksNormal: ()=>{
+
+    //    return tasks
+        return get().tasks
     }
     ,
     createTask: async (newTask,userId) => {
@@ -29,10 +36,17 @@ const useTasks = create(set => ({
     },
     updateTask: async (id, updatedData) => {
         try{
+            // update tasks
+            const update= get().tasks.map(task => {
+                
+                if(task.id === id){
+                    return {...task, ...updatedData}
+                }
+                return task
+            }
+            )
+            set(state => ({ tasks: update}))
 
-            // set(state => ({ tasks: state.tasks.filter(
-            //     task =>  task.id === updatedData.id? task = updatedData : task)}))
-           
             const {data} = await updateTask(id, updatedData);
             return data
          
@@ -73,7 +87,7 @@ const useTasks = create(set => ({
 
 
     
-}));
+})));
 
 
 export default useTasks;

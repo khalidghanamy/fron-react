@@ -24,13 +24,10 @@ useEffect(() => {
 
     
 
-//     useEffect(() => {
-//         setFilteredTasks(CheckStatus());
-//     }
-//    ,[tasks.length,updateList] ); 
+
     return ( 
         <>
-            <Card className="p-0 m-5 w-100 h-100">
+            <Card className="p-0 m-2 " style={{height:"350px",width:"350px"}}>
                 <Card.Header>
                     <Card.Title className="d-flex justify-content-center"> {taskStatus} </Card.Title>
                 </Card.Header>
